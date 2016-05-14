@@ -2,31 +2,54 @@
  * To-do List
  */
 
-var totalItems = 0;
+//var totalItems = 0;
 
 function updateItemStatus(){
 	var cbId = this.id.replace("cb_","");//'this' is whatever called the function
 	var itemText = document.getElementById("item_" + cbId);
 
 	//toggle css
-	if(this.checked){
-		itemText.style.textDecoration = "none";
+	if(!this.checked){
+		itemText.className = "";
 	} else{
-		itemText.style.textDecoration = "line-through";
+		//itemText.style.textDecoration = "line-through";
+		itemText.className = "checked";
 	}
 }
 
+function renameItem(){
+	var newText = prompt("What should we change it to?");
+	if(!newText || newText == "" || newText == " "){
+		return;
+	}
+	this.innerText = newText;
+}
+
+function removeItem(){
+	var spanId = this.id.replace("item_","");
+	document.getElementById("li_" + spanId).style.display = "none";
+}
+
 function extractFormValues(list, itemText) {
-    totalItems++;
+    //totalItems++;
+    
+    //get a unique number without using a global variable
+    var date = new Date();
+    var id = "" + date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
+
     var item = document.createElement("li");
+    item.id = "li_" + id;
     var checkBox = document.createElement("input");
-    checkBox.id = "cb_" + totalItems;
+    //checkBox.id = "cb_" + totalItems;
+    checkBox.id = "cb_" + id;
     checkBox.type = "checkbox";
     checkBox.onclick = updateItemStatus;
 
     var span = document.createElement("span");
-    span.id = "item_" + totalItems;
+    //span.id = "item_" + totalItems;
+    span.id = "item_" + id;
     span.innerText = itemText;
+    span.onclick = renameItem;
 
     item.appendChild(checkBox);
 	item.appendChild(span);
@@ -48,7 +71,7 @@ btnNew.onclick = function(){
 	inputBox.select();
 };
 
-inputBox.onkeydown = function(e){
+inputBox.onkeyup = function(e){
 	if(e.which == 13){//equals enter key
 		var text = inputBox.value;
 		if(!text || text == "" || text == " "){
