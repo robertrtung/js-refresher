@@ -2,18 +2,36 @@
  * To-do List
  */
 
+var totalItems = 0;
+
+function updateItemStatus(){
+	var cbId = this.id.replace("cb_","");//'this' is whatever called the function
+	var itemText = document.getElementById("item_" + cbId);
+
+	//toggle css
+	if(this.checked){
+		itemText.style.textDecoration = "none";
+	} else{
+		itemText.style.textDecoration = "line-through";
+	}
+}
+
 function extractFormValues(list, itemText) {
-    //var text = "";
-    //var i;
-    /*for (i = 0; i < x.length ;i++) {
-        text += x.elements[i].value + "<br>";
-    }*/
-    //text+=list.elements["task"].value+"<br>";
-    //text += "<li>" + "Hello" + "</li>";
+    totalItems++;
     var item = document.createElement("li");
-    item.innerText = itemText;
+    var checkBox = document.createElement("input");
+    checkBox.id = "cb_" + totalItems;
+    checkBox.type = "checkbox";
+    checkBox.onclick = updateItemStatus;
+
+    var span = document.createElement("span");
+    span.id = "item_" + totalItems;
+    span.innerText = itemText;
+
+    item.appendChild(checkBox);
+	item.appendChild(span);
+    
     list.appendChild(item);
-    //document.getElementById("demo").append(text);
 }
 
 var inputBox = document.getElementById("task");
