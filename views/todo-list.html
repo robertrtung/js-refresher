@@ -6,10 +6,14 @@
     <link href="styles/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    To Do: <input type="text" name="task">
-    <input type="submit" value="Add item to todo-list">
+    <form id="todo-list-input">
+      To Do: <input type="text" name="task">
+      <input type="submit" value="Add item to todo-list">
+    </form>
     <ul id="list"></ul>
-
+    <button onclick="extractFormValues()" id="try">Try it</button>
+    <p id="demo"></p>
     <a href="../index.html">Back to home</a>
+    <script src="../scripts/todo-list.js"></script>
   </body>
 </html>
