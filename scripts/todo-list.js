@@ -101,7 +101,6 @@ function rotateAnimation(el,speed){
 	if(degrees > 359){
 		degrees = 1;
 	}
-	document.getElementById("status").innerHTML = "rotate("+degrees+"deg)";
 }
 
 var td = document.getElementById("to-do");
