@@ -81,6 +81,29 @@ btnNew.onclick = function(){
 	inputBox.select();
 };
 
+var looper;
+var degrees = 0;
+function rotateAnimation(el,speed){
+	var elem = document.getElementById(el);
+	if(navigator.userAgent.match("Chrome")){
+		elem.style.WebkitTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("Firefox")){
+		elem.style.MozTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("MSIE")){
+		elem.style.msTransform = "rotate("+degrees+"deg)";
+	} else if(navigator.userAgent.match("Opera")){
+		elem.style.OTransform = "rotate("+degrees+"deg)";
+	} else {
+		elem.style.transform = "rotate("+degrees+"deg)";
+	}
+	looper = setTimeout('rotateAnimation(\''+el+'\','+speed+')',speed);
+	degrees++;
+	if(degrees > 359){
+		degrees = 1;
+	}
+	document.getElementById("status").innerHTML = "rotate("+degrees+"deg)";
+}
+
 var td = document.getElementById("to-do");
 td.onclick = function(){
 	var i = 0;
@@ -123,6 +146,7 @@ td.onclick = function(){
 	        b %= 255;
 		}, 100*j);
     }
+    rotateAnimation("to-do",1);
 }
 
 inputBox.onkeyup = function(e){
