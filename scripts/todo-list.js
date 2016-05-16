@@ -110,8 +110,9 @@ td.onclick = function(){
 	var r = 0;
 	var g = 0;
 	var b = 0;
+	var j;
     // background color
-    for(i = 0; i < 100; i++){
+    for(j = 0; j < 100; j++){
     	setTimeout(function(){
 		    document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
 			r += 1;
@@ -120,7 +121,7 @@ td.onclick = function(){
 	        g %= 255;
 	        b += 3;
 	        b %= 255;
-		}, 100*i);
+		}, 100*j);
     }
 }
 
