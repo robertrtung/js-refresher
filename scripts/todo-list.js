@@ -146,7 +146,7 @@ td.onclick = function(){
 	        b %= 255;
 		}, 100*j);
     }
-    rotateAnimation("to-do",1);
+    rotateAnimation("link",1);
 }
 
 inputBox.onkeyup = function(e){
