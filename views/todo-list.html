@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Todo-list</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <script src="../closure-library/closure/goog/base.js"></script>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
     <style>
       .checked{
         text-decoration: line-through;
@@ -13,11 +14,11 @@
     </style>
   </head>
   <body>
-    To Do: <input type="text" name="task" id="task">
+    <p id="to-do">To Do:</p> <input type="text" name="task" id="task">
     <ul id="list"></ul>
     <button onclick="extractFormValues()" id="try">Try it</button>
     <p id="demo"></p>
-    <a href="../index.html">Back to home</a>
+    <a href="../index.html"><p id="link">Back to home</p></a>
     <script src="../scripts/todo-list.js"></script>
   </body>
 </html>

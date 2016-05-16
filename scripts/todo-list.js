@@ -3,6 +3,16 @@
  */
 
 //var totalItems = 0;
+//
+// base for Animation
+goog.require('goog.fx');
+goog.require('goog.fx.dom');
+// queues
+goog.require('goog.fx.AnimationQueue');
+goog.require('goog.fx.AnimationSerialQueue');
+goog.require('goog.fx.AnimationParallelQueue');
+// easing
+goog.require('goog.fx.easing');
 
 function updateItemStatus(){
 	var cbId = this.id.replace("cb_","");//'this' is whatever called the function
@@ -70,6 +80,49 @@ btnNew.onclick = function(){
 	inputBox.focus();
 	inputBox.select();
 };
+
+var td = document.getElementById("to-do");
+td.onclick = function(){
+	var i = 0;
+	var resize = new goog.fx.dom.Resize(goog.dom.$('link'),
+	                          [100, 100], // start X and Y
+	                          [400, 400], // end X and Y
+	                          100);;
+	var resize1 = new goog.fx.dom.Resize(goog.dom.$('link'),
+	                          [400, 400], // start X and Y
+	                          [100, 100], // end X and Y
+	                          100);
+	resize.play();
+	goog.events.listen(resize, goog.fx.Animation.EventType.END,
+    function(event) {
+	        resize1.play();
+	        i++;
+    });
+    goog.events.listen(resize1, goog.fx.Animation.EventType.END,
+    function(event) {
+    	if(i < 10){
+	        resize.play();
+    	} else{
+    		console.log("Done resizing");
+    	}
+    });
+
+	var r = 0;
+	var g = 0;
+	var b = 0;
+    // background color
+    for(i = 0; i < 100; i++){
+    	setTimeout(function(){
+		    document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+			r += 1;
+	        r %= 255;
+	        g += 2;
+	        g %= 255;
+	        b += 3;
+	        b %= 255;
+		}, 100*i);
+    }
+}
 
 inputBox.onkeyup = function(e){
 	if(e.which == 13){//equals enter key
